@@ -1,18 +1,14 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, render_template
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Hello! this is the main page <h1>hello!</h1>"
+    return render_template("index.html", arr=['kang','odin','galactus'])
 
-@app.route("/<name>") #꺽쇠 안에 적힌 것이 내용 주소로 적용됨
-def user(name):
-    return f"Hello {name}"
-
-@app.route("/admin")
-def admin():
-    return redirect(url_for(("home")))
+@app.route("/<name>")
+def test(name):
+    return render_template("name.html", content=name)
 
 if __name__ == "__main__":
     app.run()
